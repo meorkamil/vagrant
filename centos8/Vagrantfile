@@ -14,9 +14,15 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "centos/8"
 
-  config.vm.provider "virtualbox"
-
   config.vm.define "centos1" do |centos|
     centos.vm.hostname = "centos1"
+    config.vm.disk :disk, size: "2GB", name: "extra_storage1"
+    config.vm.disk :disk, size: "1GB", name: "extra_storage2"
+    
+    centos.vm.provider "virtualbox" do |vb|
+      vb.name = "centos1"
+      vb.memory = "2048"
+      vb.cpus = "2"
+    end
   end
 end
