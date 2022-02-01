@@ -1,0 +1,12 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/8"
+  config.vm.provider "virtualbox"
+
+  config.vm.define "rhel1" do |rhel|
+    rhel.vm.hostname = "rhel1"
+  end
+
+  config.vm.define "rhel2" do |rhel|
+    rhel.vm.hostname = "rhel2"
+  end
+end
