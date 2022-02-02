@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "generic/rhel8"
+
+  config.vm.define "ansible1" do |ansible|
+    ansible.vm.hostname = "ansible1"
+    ansible.vm.provision "shell", path: "ansible.sh"
+    ansible.trigger.before :destroy do |trigger|
+      trigger.run_remote = {inline: "subscription-manager unregister"}
+    end
+  end
+  
+  config.vm.define "managed1" do |manage|
+    manage.vm.hostname = "manage1"
+    manage.vm.provision "shell", path: "manage.sh"
+    manage.trigger.before :destroy do |trigger|
+      trigger.run_remote = {inline: "subscription-manager unregister"}
+    end
+  end
+  config.vm.define "managed2" do |manage|
+    manage.vm.hostname = "manage2"
+    manage.vm.provision "shell", path: "manage.sh"
+    manage.trigger.before :destroy do |trigger|
+      trigger.run_remote = {inline: "subscription-manager unregister"}
+    end
+  end
+end
