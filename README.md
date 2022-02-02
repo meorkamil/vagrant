@@ -4,7 +4,7 @@
 
  ```bash
  git clone https://github.com/meorkamil/vagrant.git
- cd centos
+ cd centos8
  vagrant up
 
  ```
