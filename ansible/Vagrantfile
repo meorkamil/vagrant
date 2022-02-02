@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "generic/rhel8"
+  config.vm.network "public_network", bridge: "wlp5s0"
 
   config.vm.define "ansible1" do |ansible|
     ansible.vm.hostname = "ansible1"
